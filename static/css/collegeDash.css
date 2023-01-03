@@ -1,0 +1,142 @@
+/* Questions Create view */
+/* Job Create view */
+#quescreate {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  background: url("/static/Images/3.jpg") top center;
+  background-size: cover;
+  position: relative;
+}
+
+#quescreate:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#quescreate .container {
+  padding-top: 36px;
+  position: relative;
+  text-align: center;
+}
+
+
+/* Job Create view */
+#jobdashboard {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  background: url("/static/Images/3.jpg") top center;
+  background-size: cover;
+  position: relative;
+}
+
+#jobdashboard:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#jobdashboard .container {
+  padding-top: 72px;
+  position: relative;
+  text-align: center;
+}
+
+/* Student list view */
+#studentview {
+  width: 100%;
+  height: 100vh;
+  background: url("/static/Images/3.jpg") top center;
+  background-size: cover;
+  position: relative;
+}
+
+#studentview:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#studentview .container {
+  /* padding-top: 72px; */
+  position: relative;
+  text-align: center;
+}
+
+.box, .div1 {
+   display: none;
+}
+
+/* College Dashboard */
+#dashboard {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  background: url("/static/Images/3.jpg") top center;
+  background-size: cover;
+  position: relative;
+}
+
+#dashboard:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#dashboard .container {
+  padding-top: 72px;
+  position: relative;
+  text-align: center;
+}
+/* College Dashboard end */
+.box{
+   display: none;
+}
+.select {
+  display: grid;
+   grid-template-columns: repeat(5, 2fr);
+  grid-template-rows: repeat(auto, 2fr); 
+  column-gap: 10px;
+  row-gap: 15px;
+  grid-auto-flow:inherit;
+}
+
+.select__item {
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Heebo", sans-serif;
+  text-align: center;
+  border-radius: 3px;
+  background: #eeeeee;
+  transition: background 0.1s;
+}
+
+.select__item--selected {
+  background: #009578;
+  color: #ffffff;
+}
+
+.joblistlinks{
+   color:white;
+}
+.joblistlinks:hover{
+   color:black;
+}

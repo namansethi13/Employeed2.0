@@ -1,0 +1,52 @@
+{% extends 'mcq_app/base.html' %}
+
+
+{% block content %}
+<section id="jobdashboard" class="d-flex flex-coloumn">
+   <div class="container">
+      <div class="row justify-content-center">
+         <div class="col">
+            <div class="card mask-custom">
+               <div class="card-body pt-0 pb-2 px-4">
+                  <div class="my-4">
+                     <a href="{% url 'job_list' %}" class="btn btn-primayr">All Jobs</a>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Test</th>
+        <th scope="col">Description</th>
+        <th scope="col">Pass Percentage</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+        <tr>
+            <th scope="row">1</th>
+            <td><a href="{% url 'test_detail' object.id %}">{{object.test_name}}</a></td>
+            <td>{{object.description}}</td>
+            <td>{{object.pass_percentage}}</td>
+            {% if object.is_active %}
+              <td><a class="btn btn-success">Test is Active</a></td>
+            {% else %}
+              <td><a href="{% url 'test_update' object.id %}" class="btn btn-primary">Update</a></td>
+              <td><a href="{% url 'test_delete' object.id %}" class="btn btn-danger">Delete</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+      
+    </tbody>
+  </table>
+
+  <a href="{% url 'test_create' %}" class="btn btn-success">Create Test</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+
+{% endblock content %}

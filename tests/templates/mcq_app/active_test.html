@@ -1,0 +1,41 @@
+{% extends 'mcq_app/base.html' %}
+
+{% block content %}
+<script>
+  url = document.que
+  let width = screen.width;
+  let height = screen.height;
+  console.log(width)
+  function startTest(url){
+      console.log("opened")
+  window.open(url,
+          "", "width="+width , "height="+height);}
+</script>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Test</th>
+        <th scope="col">Description</th>
+        <th scope="col">Questions</th> 
+        <th scope="col">Pass Percentage</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for test in tests %}
+        <tr>
+            <th scope="row">1</th>
+            <td>{{test.test_name}}</td>
+            <td>{{test.description}}</td>
+            <td>{{test.total_questions}}</td>
+            <td>{{test.pass_percentage}}</td>
+            <td><a onclick="startTest('{% url 'get_test_questions' test.id %}')" class="btn btn-primary">Take Test</a></td>
+        </tr>
+        {% endfor %}
+      
+    </tbody>
+</table>
+
+
+{% endblock content %}

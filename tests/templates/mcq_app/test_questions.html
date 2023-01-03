@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quiz</title>
+        <link rel="stylesheet" href="{% static 'test.css' %}">
+    </head>
+    <body>
+        <form action="entertest.html" method="get" id="testform">
+        <section class="quizApp">
+
+        <section class="allQuestions">
+            <P class="questionIndexHeading">Questions</P>
+            <div id ="indexWrapper" class="indexWrapper" >
+                
+            </div>
+        </section>
+        <!-- this section contains everything related to questions -->
+        <section class="questionSection">
+            <!-- this div wraps all the questions in it -->
+            <div class="questions">
+                {% for question in questions %}
+                <div class="question" id="" indexnum="{{question.index}}">
+
+                    <p class="QuestionHeading">{{question.question}}</p>
+                    
+                    <input type="radio" id="A" name="{{question.index}}" value="A">
+                    <label for="A">{{question.A}}</label><br>
+                    
+                    <input type="radio" id="B" name="{{question.index}}" value="B">
+                    <label for="B">{{question.B}}</label><br>
+                    
+                    <input type="radio" id="C" name="{{question.index}}" value="C">
+                    <label for="C">{{question.C}}</label><br>
+                    
+                    <input type="radio" id="D" name="{{question.index}}" value="D">
+                    <label for="D">{{question.D}}</label><br>
+                    
+                </div>
+                {% endfor %}
+            </div>
+                
+        </section>
+    </section>
+    <section class="controls">
+        <div class="panel">
+            <button class="panBtn" id="nextBtn" type="button">next question</button>
+            <input class="panBtn" id="flagBtn" type="button" value="flag question">
+            <input type="submit" class="panBtn qBtnFlagged" value="submit test">
+        </div>
+
+    </section>
+
+
+
+    </form>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{% static 'testapp.js' %}"></script>
+    </body>
+</html>

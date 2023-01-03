@@ -1,0 +1,103 @@
+{% extends 'mcq_app/base.html' %} 
+{% load addcss %}
+{% block script %}
+<style>
+   #answer option:nth-child(1){
+      display: none;
+   }
+   #skill option:nth-child(1){
+      display: none;
+   }
+</style>
+{% endblock script %}
+
+
+
+{% block content %}
+<section class="d-flex flex-coloumn" id="quescreate">
+   <div class="container">
+      <div class="row justify-content-center">
+         <div class="col">
+            <div class="card mask-custom">
+               <div class="card-body pt-0 pb-2 px-4">
+                  <div class="my-4">
+                     <form method="post">
+                        {% csrf_token %}
+                        <table class="table">
+                           <thead>
+                              <tr class = "bg-dark text-white">
+                                 
+                                 <th scope="col">Questions</th>
+                                 <th scope="col">Option A</th>
+                                 <th scope="col">Option B</th>
+                                 <th scope="col">Option C</th>
+                                 <th scope="col">Option D</th>
+                                 <th scope="col">Answer</th>
+                                 <th scope="col">Is Public</th>
+                                 <th scope="col">Skill</th>
+                              </tr>
+                           </thead>
+                           <tbody class = "align-items-center">
+                              {{ formset.management_form }} 
+                              {% for form in formset %}
+                              <tr>
+                                 {{ form.id }}
+                                 <td>
+                                    <div class="form-outline form-white">
+                                       {{form.question|addcss:"form-control question+question"}}
+                                       <label for="question" class="form-label">Question {{forloop.counter}}</label>
+                                    </div>
+                                 </td>
+                                 <td style = "vertical-align: middle;">
+                                    <div class="form-outline form-white">
+                                       {{form.A|addcss:"form-control+optionA"}}
+                                       <label for="optionA" class="form-label">Option A</label>
+                                    </div>
+                                 </td>
+                                 <td style = "vertical-align: middle;">
+                                    <div class="form-outline form-white">
+                                       {{form.B|addcss:"form-control+optionb"}}
+                                       <label for="optionb" class="form-label">option B</label>
+                                    </div>
+                                 </td>
+                                 <td style = "vertical-align: middle;">
+                                    <div class="form-outline form-white">
+                                       {{form.C|addcss:"form-control+optionC"}}
+                                       <label for="optionC" class="form-label">option C</label>
+                                    </div>
+                                 </td>
+                                 <td style = "vertical-align: middle;">
+                                    <div class="form-outline form-white">
+                                       {{form.D|addcss:"form-control+optionD"}}
+                                       <label for="optionD" class="form-label">option D</label>
+                                    </div>
+                                 </td>
+                                 <td style = "vertical-align: middle;">
+                                       {{form.answer|addcss:"form-select-sm+answer"}}
+                                 </td>
+                                 <td style = "vertical-align: middle;">{{form.is_public}}</td>
+                                 <td style = "vertical-align: middle;">{{form.skill|addcss:"form-select-sm+skill"}}</td>
+                              </tr>
+                              {% endfor %}
+                           </tbody>
+                        </table>
+                        <button
+                           type="submit"
+                           class="btn btn-success"
+                        >Submit</button>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<script>
+   questionlist = document.querySelectorAll(".question");
+   questionlist.forEach(element=>{
+      element.setAttribute("rows","2");
+   });
+</script>
+{% endblock content %}

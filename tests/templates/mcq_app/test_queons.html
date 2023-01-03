@@ -1,0 +1,13 @@
+{% extends 'mcq_app/base.html' %}
+
+{% block content %}
+    {% for question in questions %}
+        S.no : {{question.index}}<br>
+        question : <br>
+        option A : <br>
+        option B : {{question.B}}<br>
+        option C : {{question.C}}<br>
+        option D : {{question.D}}
+        <hr>
+    {% endfor %}
+{% endblock %}

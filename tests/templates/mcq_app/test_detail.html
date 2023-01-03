@@ -1,0 +1,162 @@
+{% extends 'mcq_app/base.html' %}
+{% load addcss %}
+{% block script %}
+<meta id = "meta" startdate = "{{object.start_date}}">
+{% endblock script %}
+
+{% block content %}
+<section id="jobdashboard" class="d-flex flex-coloumn">
+   <div class="container">
+      <div class="row justify-content-center">
+         <div class="col">
+            <div class="card mask-custom">
+               <div class="card-body pt-0 pb-2 px-4">
+                  <div class="my-4">
+
+                     <div class="row d-flex justify-content-center mb-4">
+                        <div class="col text-start">
+                           <b>Job Details:</b><br>
+                           <b>Job</b> : {{job_obj.job_name}}<br>
+                           <b>Description</b> : {{job_obj.job_description}}<br>
+                           <b>Eligibility</b> : {{job_obj.eligibility}}<br>
+                           <b>Courses </b> : {% for course in courses %}
+                              {{course}},
+                           {% endfor %}<br>
+
+                           <b>Skills </b> :{% for skill in skills %}
+                           {{skill}},
+                        {% endfor %}<br>
+                           <b>status</b> : 
+                           {% if job_obj.post_it == "PRIVATE" %}
+                              <a href="{% url 'job_post' object.id %}" class="form-control"> Post it</a>
+                           {% else %}
+                              {{job_obj.post_it}}
+                           {% endif %}<br>
+                           
+                           
+                        </div>
+                        
+                        <div class="col text-start">
+                           <b>Test Details:</b><br>
+                        <b>Name</b> : {{object.test_name}}<br>
+    <b>Description</b> : {{object.description}}<br>
+    <b>Total Questions</b> : {{object.total_questions}}<br>
+    <b>Pass Percentage</b> : {{object.pass_percentage}}%<br>
+    <b>Start Date</b> : {{object.start_date}}<br>
+    <b>End Date</b> : {{object.end_date}}<br>
+    <b>Time Limit</b> : {{object.time_limit}}<br>
+                        </div>
+                     </div>
+    <button  id ="updatetest" class="btn btn-primary btn-block"><a href="{% url 'test_update' object.id %}">Update Test Details</a></button>
+<div class="mb-4"></div>
+    {% block Question %}
+    <table class="table">
+        <thead>
+          <tr class = "bg-grayish">
+            <th scope="col">#</th>
+            <th scope="col">Questions</th>
+            <th scope="col">Option A</th>
+            <th scope="col">Option B</th>
+            <th scope="col">Option C</th>
+            <th scope="col">Option D</th>
+            <th scope="col">Answer</th>   
+            <th scope = "col">Operation</th>         
+          </tr>
+        </thead>
+        <tbody>
+            {% for question in questions %}
+            <tr>
+                <th scope="row">1</th>
+                <td><b>{{question.question}}</b></td>
+                <td>{{question.A}}</td>
+                <td>{{question.B}}</td>
+                <td>{{question.C}}</td>
+                <td>{{question.D}}</td>
+                <td class = "text-success"><b>{{question.answer}}</b></td>
+                {% if not object.is_active %}
+               <td>
+                <button class = "btn btn-primary btn-sm deletebutton" data-mdb-toggle="modal" data-mdb-target="#confirmdelete{{forloop.counter}}">
+                           Delete
+                        </button>
+
+                                 <div class="modal fade" id="confirmdelete{{forloop.counter}}" tabindex="-1" aria-labelledby="confirmdeletlabel" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h5 class="modal-title text-danger" id="confirmdeletlabel">Confirm Delete?</h5>
+                                       <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                 </div>
+                                 <div class="modal-body text-start">
+                                    <p id="modaltext">
+                                       Are You sure you want to delete this question?
+                                    </p>
+                                 </div>
+                                 <div class="modal-footer">
+                                    <div class="col text-start">
+                                    <button type="button" class="btn btn-primary btn-success" data-mdb-dismiss="modal">Cancel</button>
+                                    </div>
+                                    <div class="col text-end">
+                                       <a
+                                    href="{% url 'question_delete' question.id %}"
+                                    class="btn btn-danger"
+                                    >Delete</a
+                                 >
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        </td>
+                <!-- <td><a href="{% url 'question_delete' question.id %}" class="btn btn-danger">Delete</a></td> -->
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    {% endblock Question %}
+    
+    <button class="btn btn-success" id = "updatequestion"><a href="{% url 'question_create' object.id %}" >Add/Update Question</a></button>
+    <!-- 
+    <p>Test is now active, once the last day of submission will be over we will notify you about the result of the test</p>
+    <p><b>if by mistake is has been launched, then plese send the a request to the admin Email : adminemployeed@gmail.com</b></p>
+    -->
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+
+
+
+<script>
+   // Current DAte
+ var objToday = new Date(),
+	dayOfMonth = today + ( objToday.getDate() < 10) ? '0' + objToday.getDate(): objToday.getDate(),
+	months = new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'),
+	curMonth = months[objToday.getMonth()],
+	curYear = objToday.getFullYear();
+var today = curMonth + ". " + dayOfMonth + ", " + curYear;
+   
+
+
+   let updatetest = document.getElementById("updatetest");
+   console.log(updatetest);
+   deletebtns = document.querySelectorAll(".deletebutton");
+   updatequestion= document.getElementById("updatequestion");
+
+   start_date = document.getElementById("meta").getAttribute("startdate");
+   if(today >= start_date){
+      updatetest.setAttribute("disabled","disabled");
+      updatequestion.setAttribute("disabled","disabled");
+      deletebtns.forEach(element =>{
+         element.setAttribute("disabled","disabled");
+      })
+   }
+</script>
+
+
+{% endblock content %}

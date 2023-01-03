@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;500&family=Rubik&family=Source+Code+Pro:wght@200&family=Ubuntu:wght@300&display=swap');
+* , *::before , *::after{
+
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.allQuestions{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+    background-color: #F5F5F5;
+    /* border: 2px solid black; */
+    width: 30%;
+    height: 50em;
+}
+.questionIndexHeading{
+    display: flex;
+    justify-content: center;
+    font-weight: 900;
+}
+
+.indexWrapper{
+    padding: 20px 0px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 3rem 1rem;
+    margin: 0 1.5rem;
+}
+.questions{
+    /* border: 2px solid black; */
+    margin: 15em  20em;
+
+}
+
+.quizApp{
+    display: flex;
+    width: 100%;
+}
+
+.questions p{
+    font-size: 200%;
+}
+
+.questions label{
+    font-size: 150%;
+}
+
+.index{
+    margin: 2%;
+    display: inline-block;
+    background-color: #32CD32;
+    border: 1px solid black;
+}
+
+.questionSection{
+    display: flex;
+}
+.NextQuestionBtn{
+    margin-right: 10%;
+    margin-top: 50%;
+    height: 2em;
+}
+
+#questionHidden{
+    display: none;
+}
+
+.questions div{
+    position: absolute;
+}
+
+.panel{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    margin-top: 1em;
+    margin-left: 5em;
+    /* border: 2px solid black; */
+    background-color: #edededc5;
+    height: 9em;
+    width: 80em;
+}
+
+.qBtn{
+    border: 1px solid grey;
+  border-radius: 5px;
+  /* margin: 10px; */
+   padding: 10px;
+  /* width: 5rem; */
+  /* height: 1rem; */
+  text-align: center;
+  transition: filter .2s;
+  justify-content: center;
+  background-color: #BAEA91;
+
+}
+.qBtnFlagged{
+    border: 1px solid grey;
+  border-radius: 5px;
+  /* margin: 10px; */
+   padding: 10px;
+  /* width: 5rem; */
+  /* height: 1rem; */
+  text-align: center;
+  transition: filter .2s;
+  justify-content: center;
+    background-color: #ff9100;
+
+}
+.qBtn:hover{
+    filter: brightness(110%);
+    cursor: pointer;
+}
+.qBtnFlagged:hover{
+    filter: brightness(110%);
+    cursor: pointer;
+}
+
+.panBtn{
+    position: relative;
+    top: 3em;
+    left: 70em;
+    border: 1px solid grey;
+    border-radius: 5px;
+    /* margin: 10px; */
+     padding: 10px;
+    /* width: 5rem; */
+    /* height: 1rem; */
+    text-align: center;
+    transition: filter .2s;
+    justify-content: center;
+    background-color: #BAEA91;
+}
+.panBtn:hover{
+    filter: brightness(110%);
+    cursor: pointer;
+}

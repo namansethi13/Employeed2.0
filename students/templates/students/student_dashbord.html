@@ -1,0 +1,31 @@
+{% extends 'mcq_app/base.html' %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+    <hr>
+    
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Test Name</th>
+        <th scope="col">Total Questions</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Take Test</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for test in tests %}
+        <tr>
+            <th>{{ test.test_name}}</th>
+            <td>{{ test.total_questions }}</td>
+            <td>{{ test.start_date }}</td>
+            <td>{{ test.duration }}}</td>
+            <td><a  href="{% url 'get_test_questions' test.id %}" class="btn btn-primary">Take Test</a></td>
+        </tr>
+        {% endfor %}
+      
+    </tbody>
+  </table>
+    
+{% endblock content %}
