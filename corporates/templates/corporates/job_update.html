@@ -1,0 +1,154 @@
+{% extends 'mcq_app/base.html' %}
+{% load addcss %}
+
+{% block content %}
+<form method="post">
+                        {% csrf_token %}
+<!-- Add Skills Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" data-mdb-backdrop = "static" data-mdb-keyboard = "false"
+aria-labelledby="exampleModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Select Skills Required</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" ></button>
+      </div>
+      <div class="modal-body">
+        
+         
+      {{form.skills|addcss:"custom-select+skills"}}
+   </div>
+         
+   <div class="modal-footer">
+      <button type="button" data-mdb-dismiss="modal" class="btn btn-primary" id = "skillsclose" >Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Eligibility Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" data-mdb-backdrop = "static" data-mdb-keyboard = "false"
+aria-labelledby="exampleModal2"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel2">Select Eligible courses</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" ></button>
+      </div>
+      <div class="modal-body">
+        
+      {{form.eligible_courses|addcss:"custom-select+eligible_courses"}}
+   </div>
+   <div class="modal-footer">
+      <button type="button" data-mdb-dismiss="modal" class="btn btn-primary" id = "eligibilityclose">Add </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section id="jobdashboard" class="d-flex flex-coloumn">
+   <div class="container">
+      <div class="row justify-content-center">
+         <div class="col">
+            <div class="card mask-custom">
+               <div class="card-body pt-0 pb-2 px-4">
+                  <div class="my-4">
+                     <div class="row d-flex mb-4 justify-content-center align-items-center">
+                        <div class="col text-start align-self-center">
+                           <span class="display-6">Update Job Opening</span>
+                        </div>
+                        <div class="col text-end align-self-center">
+                           <span>
+                              <a href="{% url 'job_list' %}">
+                                 <i class="ri-arrow-left-circle-line ri-3x"></i>
+                              </a>
+                           </span>
+                        </div>
+                     </div>
+                        <!-- Job Name -->
+                        <div class="form-outline form-white mb-3">
+                           {{form.job_name|addcss:"form-control+jobname"}}
+                           <label for="jobname" class="form-label text-white"
+                              >Job Name</label
+                           >
+                        </div>
+
+                        <!-- Job Description  -->
+                        <div class="form-outline  form-white mb-3">
+                           {{form.job_description|addcss:"form-control+jobdes"}}
+                           <label for="jobdes" class="form-label text-white"
+                              >Job Description</label
+                           >
+                        </div>
+
+                        <!-- Job Eligibility  -->
+                        <div class="form-outline form-white mb-3">
+                           {{form.eligibility|addcss:"form-control+elgibility"}}
+                           <label
+                              for="eligibility"
+                              class="form-label text-white"
+                              >Eligibility</label
+                           >
+                        </div>
+                        <div class="row mb-3 mx-auto d-flex justify-content-center">
+                        <!-- skills  -->
+                        <div class="col text-end px-0 align-items-center">
+                              <input type="text" id = "inputskills" class = "form-control" value = "Skills Required" disabled>
+                        </div>
+                        <div class="col form-outline text-start px-0 align-items-center">
+                           <button id = "skillsreq" type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal" onclick = "inputskillsclicked()">
+                                 Add Skills Required
+                           </button>
+                        </div>
+
+                        <!-- eligible_courses  -->
+                        <div class="col text-end px-0 align-items-center">
+                              <input type="text" id = "inputcourses" class = "form-control"value = "Eligible Courses" disabled>
+                        </div>
+                        <div class="col form-outline px-0 text-start align-items-center">
+                           <button id = "eligiblecourses" type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal2" onclick="inputcoursesclicked()">
+                                 Add Elgibile courses
+                           </button>
+                        </div>
+                        </div>
+
+                        <!-- Add Test Modal -->
+                        <!-- Button trigger modal -->
+                        <button
+                           type="submit"
+                           class="btn btn-primary btn-block"
+                        >
+                           Submit
+                        </button>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<script>
+   document.getElementById("jobdes").setAttribute("rows", "3");
+   document.getElementById("elgibility").setAttribute("rows", "3");
+   document.getElementById("jobdesc").setAttribute("rows","3");
+
+   document.getElementById("duration").setAttribute("data-mdb-toggle","tooltip");
+   document.getElementById("duration").setAttribute("title","Format = Hours : Mins : Seconds");
+   $(function () {
+      $("#datetimepicker1").datetimepicker({
+         format: "YYYY-MM-DD",
+      });
+
+      $("#datetimepicker2").datetimepicker({
+         format: "YYYY-MM-DD",
+      });
+   });
+
+</script>
+
+{% endblock content %}

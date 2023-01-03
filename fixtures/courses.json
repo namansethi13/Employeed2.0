@@ -1,0 +1,106 @@
+[
+{
+    "model": "colleges.coursemodel",
+    "pk": 1,
+    "fields": {
+        "abbrevation": "BA",
+        "full_name": "Bachelor of Arts"
+    }
+},
+{
+    "model": "colleges.coursemodel",
+    "pk": 2,
+    "fields": {
+        "abbrevation": "BBA",
+        "full_name": "Bachelor of Business Administration"
+    }
+},
+{
+    "model": "colleges.coursemodel",
+    "pk": 3,
+    "fields": {
+        "abbrevation": "BMS",
+        "full_name": "Bachelor of Management Studies"
+    }
+},
+{
+    "model": "colleges.coursemodel",
+    "pk": 4,
+    "fields": {
+        "abbrevation": "BSc",
+        "full_name": "Bachelor of Science"
+    }
+},
+{
+    "model": "colleges.coursemodel",
+    "pk": 5,
+    "fields": {
+        "abbrevation": "BSIT",
+        "full_name": "Bachelor of Science in Information Technology"
+    }
+},
+{
+    "model": "colleges.coursemodel",
+    "pk": 6,
+    "fields": {
+        "abbrevation": "BCom",
+        "full_name": "Bachelor of Commerce"
+    }
+},
+{
+    "model": "colleges.coursemodel",
+    "pk": 7,
+    "fields": {
+        "abbrevation": "BFA",
+        "full_name": "Bachelor of Fine Arts"
+    }
+},
+{
+    "model": "colleges.coursemodel",
+    "pk": 8,
+    "fields": {
+        "abbrevation": "LLB",
+        "full_name": "Bachelor of Laws"
+    }
+},
+{
+    "model": "colleges.coursemodel",
+    "pk": 9,
+    "fields": {
+        "abbrevation": "BE",
+        "full_name": "Bachelor of Engineering"
+    }
+},
+{
+    "model": "colleges.coursemodel",
+    "pk": 10,
+    "fields": {
+        "abbrevation": "BTech",
+        "full_name": "Bachelor of Technology"
+    }
+},
+{
+    "model": "colleges.coursemodel",
+    "pk": 11,
+    "fields": {
+        "abbrevation": "BEd",
+        "full_name": "Bachelor of Education"
+    }
+},
+{
+    "model": "colleges.coursemodel",
+    "pk": 12,
+    "fields": {
+        "abbrevation": "MBBS",
+        "full_name": "Bachelor of Medicine, Bachelor of Surgery:"
+    }
+},
+{
+    "model": "colleges.coursemodel",
+    "pk": 13,
+    "fields": {
+        "abbrevation": "BArch",
+        "full_name": "Bachelor of Architecture"
+    }
+}
+]

@@ -1,0 +1,7 @@
+{% autoescape off %}
+Hi {{ username }},
+
+Please check out new Job for you, You can register for it using below link
+http://{{ domain }}{% url 'job_registration_detail' pk=job_id %}
+
+{% endautoescape %}

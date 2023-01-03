@@ -1,0 +1,30 @@
+
+{% block body %}
+    <p><b>Job name</b>: {{object.job_name}}</p>
+    <p><b>Descriptiong </b>: {{object.job_description}}</p>
+    <p><b>Looking for</b>: {{object.eligibility}}</p>
+    <p><b>Skills</b> :
+        {% for skill in skills %}
+            {{skill}}, 
+        {% endfor %} 
+    </p>
+    <p><b>Eligible Courses</b> : 
+        {% for course in courses %}
+            {{course}}, 
+        {% endfor %}
+    </p>
+
+    <hr>
+    <p><b>Test Name : </b> {{ test_obj.test_name }}</p>
+    <p><b>description : </b> {{ test_obj.description }}</p>
+    <p><b>Total questions : </b> {{ test_obj.total_questions }}</p>
+    <p><b>pass_percentage : </b> {{ test_obj.pass_percentage }}</p>
+    <p><b>starts on :</b>{{ test_obj.start_date }}</p>
+    <p><b>ends on :</b>{{ test_obj.end_date }}</p>
+    <p><b>duration :</b>{{ test_obj.duration }}</p>
+
+    {% block registration %}
+
+    {% endblock registration %}
+    
+{% endblock body %}
