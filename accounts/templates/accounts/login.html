@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% load static %} {% load addcss %} {% block title %}
+<title>Login</title>
+{% endblock title %} {% block script %}
+
+
+{% endblock script %} {% block body %}
+<section id="hero" class="d-flex flex-column justify-content-center">
+   <div class="container">
+      <div class="row justify-content-center">
+         <div class="col-xl-8">
+            <div class="card mask-custom">
+               <div class="card-body p-5 text-white">
+                  <div class="my-4">
+                     <h1 class = "mb-4">Login</h1>
+                     <h3 class = "mb-4">To log in, please fill in these text fiels with your e-mail address and password.</h3>
+                     <form method="post">
+                        {% csrf_token %}
+                        <!-- Email input -->
+                        <div class="form-outline mb-4 form-white">
+                           {{form.username|addcss:"form-control+email"}}
+                           <label class="form-label" for="email"
+                              >Email address</label
+                           >
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-4 form-white">
+                           {{form.password|addcss:"form-control+password"}}
+                           <label class="form-label" for="password"
+                              >Password</label
+                           >
+                        </div>
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-white btn-block mb-4">
+                           Sign in
+                        </button>
+                        <hr class="hr">
+                        <!-- 2 column grid layout for inline styling -->
+                      
+                           <div class="d-flex justify-content-center">
+                              <!-- Simple link -->
+                              
+                              <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                           </div>
+      
+
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+
+{% endblock body %}

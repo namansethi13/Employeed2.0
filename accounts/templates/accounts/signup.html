@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% load addcss %}
+
+{% block title %}
+    <title>Sign Up</title>
+{% endblock title %}
+
+{% block script %}
+
+{% endblock script %}
+
+
+{% block body %}
+<section id="hero" class="d-flex flex-column justify-content-center">
+   <div class="container">
+      <div class="row justify-content-center">
+         <div class="col-xl-8">
+            <div class="card mask-custom">
+               <div class="card-body p-4 text-white">
+                  <div class="my-4">
+                     <h1 class = "mb-4">Signup</h1>
+                     <h4 class="mb-4">Please Fill the following details to register yourself.</h4>
+                     <form method="post">
+                        {% csrf_token %}
+                        <!-- Role input -->
+                        <div class="mb-4">
+                           {{signup_form.role|addcss:"form-select+."}}                     
+                        </div>
+
+                        <!-- Email input -->
+                        <div class="form-outline mb-4 form-white">
+                           {{signup_form.email|addcss:"form-control+email"}}
+                     <label for="email" class="form-label"> Email </label>
+                        </div>
+
+                        <!-- Password Input -->
+                        <div class="form-outline mb-4 form-white">
+                     {{signup_form.password1|addcss:"form-control+password1"}}
+                     <label for="password1" class="form-label"> Password: </label>
+                  </div>
+                        <!-- Retype Pass Input -->
+                        <div class="form-outline mb-4 form-white">
+                     {{signup_form.password2|addcss:"form-control+password2"}}
+                     <label for="password2" class="form-label">
+                        Retype your password:
+                     </label>
+                  </div>
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-white btn-block mb-4">
+                           Register
+                        </button>
+                        <hr class="hr">
+                        <!-- 2 column grid layout for inline styling -->
+                      
+                           <div class="d-flex justify-content-center">
+                              <!-- Simple link -->
+                              <p>Already a Member?<br>
+                                 <a href="{% url 'login' %}">Login</a>
+                              </p>
+                           </div>
+      
+
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+
+
+{% endblock %}

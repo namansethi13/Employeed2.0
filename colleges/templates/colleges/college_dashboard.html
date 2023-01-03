@@ -1,0 +1,215 @@
+{% extends "base.html" %} {% load static %} {% load addcss %} {% block title %}
+<title>Collge Dashboard</title>
+{% endblock title %}
+
+
+{% block script %}
+<link rel="stylesheet" href="{% static 'css/collegeDash.css'%}" />
+{% endblock script %}
+
+{% block body %}
+<div class="div1">
+   {%for course in courses %}
+   <p>{{course.0.abbrevation}}</p>
+   {% endfor %}
+</div>
+
+<!-- Add coursses Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" data-mdb-backdrop = "static" data-mdb-keyboard = "false"
+aria-labelledby="exampleModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Select Courses  Which You Want To Add</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+         <form method="post">
+      {% csrf_token %}
+      
+      {{course_form.course_options|addcss:'custom-select+.'}}
+   </div>
+   <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Add Courses</button>
+   </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->
+
+<section id="dashboard" class="d-flex flex-column">
+   <div class="container">
+      <div class="row justify-content-center">
+         <div class="col">
+            <div class="card mask-custom">
+               <div class="card-body p-4 text-white">
+                  <div class="my-4">
+                     
+
+<div>
+   <div class="container-fluid">
+      <div class="row bg-dark mb-2">
+         <div class="col-6 text-start align-self-center">
+            <span class="display-6 text-light">Courses</span>
+         </div>
+         <div class="col-3 align-self-center text-end">
+            {% csrf_token %}
+            <a href="{% url 'download_sample_csv' %}">
+               <button class="btn btn-primary" id="downloadbtn">
+                  Download Sample CSV
+               </button>
+            </a>
+         </div>
+         <div class="col-3 align-self-center text-end">
+            <button id = "addcoursebtn" type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+               Add Courses
+            </button>
+            
+         </div>
+      </div>
+      {% if courses %}
+         {% for course in courses %}
+            {% if course.1 == "NO_DATA" %}   
+               <div class="row mb-1">
+                  <div class = "col-1 border text-dark fw-bol">
+                     {{course.0.abbrevation}}
+                  </div>
+                  <div class = "col-4 border text-dark">
+                     {{course.0.full_name}} 
+                  </div>
+                  {% if uploac_csv_form %}
+                     <div class = "col-3 border">
+                        <form
+                           method="POST"
+                           enctype="multipart/form-data"
+                           action="{% url 'upload_student_data' %}"
+                        >
+                           {% csrf_token %}
+                           <input
+                              type="hidden"
+                              name="course_id"
+                              value="{{course.0.id}}"
+                           />
+                           {{ uploac_csv_form.csv_file|addcss:'form-control form-control-sm+.'}}
+                     </div>
+                     <div class = "col-2 text-end border">
+                        <button type = "submit" class = "btn btn-primary btn-sm">
+                           Submit
+                        </button>
+                        </form>
+                     </div>
+                  {% endif %} 
+                  {% if course.1 != "UPDATING" %}
+                  <div  class = "col-2 text-end border">
+                  <!-- Confirm Delete Option -->
+                     <button class = "btn btn-primary btn-sm" data-mdb-toggle="modal" data-mdb-target="#target-id{{forloop.counter}}" data-mdb-whatever = "{{course.0.full_name}}({{course.0.abbrevation}})">
+                        Delete
+                     </button>
+                     <div class="modal fade" id="target-id{{forloop.counter}}" tabindex="-1" data-mdb-backdrop = "static" data-mdb-keyboard = "false"
+aria-labelledby="confirmdeletelabel"
+  aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title text-danger" id="confirmdeletlabel">Confirm Delete?</h5>
+                                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body text-start">
+                                 <p id="modaltext " class= "text-danger">
+                                    Are You sure you want to Delete {{course.0.abbrevation}} Course?
+                                 </p>
+                              </div>
+                              <div class="modal-footer">
+                                 <div class="col text-start">
+                                 <button type="button" class="btn btn-primary btn-success" data-mdb-dismiss="modal">Cancel</button>
+                                 </div>
+                                 <div class="col text-end">
+                                    <a href="{% url 'delete_course_from_college' course.0.id %}">
+                                    <button type="button" class="btn btn-primary btn-danger">Delete</button>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% endif %}      
+               </div>
+            {% else %}
+               <div class="row mb-1">
+                  <div class = "col-1 border">
+                     {{course.0.abbrevation}}
+                  </div>
+                  <div class = "col-4 border">
+                     {{course.0.full_name}} 
+                  </div>
+                  {% if course.1 != "UPDATING" %}
+                     <div class = "col-3 text-end border">
+                        <a href="{% url 'retrieve_students' course.0.id %}">
+                        <button class = "btn btn-primary btn-sm">
+                           <i class="fas fa-eye fa-lg"></i> View Student Details</button>
+                        </a> 
+                     </div>
+                     <div  class = "col-4 text-end border">
+                     <!-- Confirm Delete Option -->
+                        <button class = "btn btn-primary btn-sm" data-mdb-toggle="modal" data-mdb-target="#confirmdelete{{forloop.counter}}" data-mdb-whatever = "{{course.0.full_name}}({{course.0.abbrevation}})">
+                           Delete
+                        </button>
+                        <div class="modal fade" id="confirmdelete{{forloop.counter}}" tabindex="-1" aria-labelledby="confirmdeletlabel" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h5 class="modal-title text-danger" id="confirmdeletlabel">Confirm Delete?</h5>
+                                       <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                 </div>
+                                 <div class="modal-body text-start">
+                                    <p id="modaltext" class="text-danger">
+                                       Are You sure you want to Delete {{course.0.abbrevation}} Course?
+                                    </p>
+                                 </div>
+                                 <div class="modal-footer">
+                                    <div class="col text-start">
+                                    <button type="button" class="btn btn-primary btn-success" data-mdb-dismiss="modal">Cancel</button>
+                                    </div>
+                                    <div class="col text-end">
+                                       <a href="{% url 'delete_course_from_college' course.0.id %}">
+                                       <button type="button" class="btn btn-primary btn-danger">Delete</button>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                  {% else %}
+                     <div class = "col-3 text-end border">
+                        <span id="status">{{course.1}}</span>
+                     </div>
+                     <div  class = "col-4 text-end border">
+                     <!-- Confirm Delete Option -->
+                        <button class = "btn btn-primary btn-sm btn-disabled pe-auto" data-mdb-toggle="modal" data-mdb-target="#confirmdelete" data-mdb-whatever = "{{course.0.full_name}}({{course.0.abbrevation}})" disabled>
+                           Delete
+                        </button>
+                        </div>
+                  {% endif %}
+                  </div>
+               </div>
+            {% endif %}
+         {% endfor %}
+      {% endif %}
+   </div>
+</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+
+
+<script type="text/javascript" src="{% static 'js/collegeDash.js' %}"></script>
+{% endblock body %}
